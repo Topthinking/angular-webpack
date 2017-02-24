@@ -1,7 +1,9 @@
 <div id="home_edit">
 <h2>修改名字</h2>
-名字<input type="text" ng-model="vm.name">
-<p>{{vm.name}}</p>
-<button ng-click="vm.change_name()">提交</button>
+名字&nbsp;&nbsp;<input type="text" ng-model="vm.name">
+<span>{{vm.name}}</span>
+<br/><br/>
+<button ng-click="vm.change_name()">确认提交</button>
+<button ng-click="vm.del_name()">删除名字</button>
 <small>{{vm.text}}</small>
 </div>
