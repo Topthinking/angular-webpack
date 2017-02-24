@@ -1,24 +1,20 @@
 'use strict';
 
 class HomeEditController {
-  constructor($http) {
+  constructor($http,$rootScope) {
     this.$http = $http;
+    this.$rootScope = $rootScope;
   	require('./home.edit.less');
-
-    var a = $http({
-      method:"GET",
-      url:'/home/edit'
-    }).success(function(data){
-      console.log(data);
-    });
-
-      console.log(a.$$state);
-      
+    this.name = $rootScope.name;
+    this.text = 123;
   }
   change_name(){
-  	this.$http.post('/home/edit',{
+  	this.$http.post('/home/edit/',{
       "name":this.name
-    });
+    }).then(function(data){
+      this.text = this.name + data.data.msg;
+      this.$rootScope = this.name;
+    }.bind(this));
   }
 }
 

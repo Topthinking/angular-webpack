@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
-    "mock": "json-server --watch mock/db.json --routes mock/router.json --port 9090"
+    "jsw": "json-server --watch json_server/db.json --routes json_server/router.json --port 9090"
   },
   "author": "Topthinking",
   "license": "ISC",

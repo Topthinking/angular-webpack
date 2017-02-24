@@ -1,9 +1,9 @@
 'use strict';
 
 class HomeController {
-  constructor() {
+  constructor($rootScope) {
   	require('./home.less');
-  	this.name = "top";
+  	this.name = $rootScope.name;
   }
 }
 

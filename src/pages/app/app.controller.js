@@ -1,8 +1,10 @@
 'use strict';
 
 class AppController {
-	constructor(){
-		this.name = "123";
+	constructor($rootScope){
+		$rootScope.name = "Top";
+		this.name = $rootScope.name;
+		console.log($rootScope.name);
 	}
 }
 

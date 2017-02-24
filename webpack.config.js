@@ -1,5 +1,8 @@
 let htmlWebpackPlugin = require('html-webpack-plugin');
 let webpack = require('webpack');
+let fs =require('fs');
+require('./mock/server')
+
 module.exports = {
 	entry:{
 		app:'./src/core/angular.bootstrap.js'
@@ -17,7 +20,8 @@ module.exports = {
 		port:9123,
 		proxy: {
             '**/*': {
-                target: 'htstp://localhost:9090',
+                target: 'htstp://localhost:9020',
+                pathRewrite:JSON.parse(fs.readFileSync('./rewrite.json')),
                 secure: false
             }
         }
