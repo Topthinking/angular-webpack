@@ -1,9 +1,12 @@
 'use strict';
 
 class HomeController {
-  constructor($rootScope) {
+  constructor($scope) {
   	require('./home.less');
-  	this.name = $rootScope.name;
+  	this.$scope = $scope;
+	this.$scope.$on('changeName',function(event,value){
+		this.name = value;
+	}.bind(this));
   }
 }
 

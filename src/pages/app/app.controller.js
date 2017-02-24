@@ -1,10 +1,11 @@
 'use strict';
 
 class AppController {
-	constructor($rootScope){
-		$rootScope.name = "Top";
-		this.name = $rootScope.name;
-		console.log($rootScope.name);
+	constructor($scope){
+		this.$scope = $scope;
+		this.$scope.$on('changeName',function(event,value){
+			this.name = value;
+		}.bind(this));
 	}
 }
 
