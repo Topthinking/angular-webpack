@@ -6,7 +6,7 @@ function AppRouter($urlRouterProvider, $stateProvider,$qProvider) {
 
   $stateProvider
     .state('app',{
-      abstruct:true,
+      abstract:true,
       url:'/app',
       template:require('./app/app.html'),
       controller:'AppController as vm',

@@ -14,7 +14,13 @@ module.exports = {
 		hot:true,
 		inline:true,
 		progress:true,
-		port:9123
+		port:9123,
+		proxy: {
+            '**/*': {
+                target: 'htstp://localhost:9090',
+                secure: false
+            }
+        }
 	},
 	resolve:{
 		root:__dirname+'/src/'
@@ -38,13 +44,13 @@ module.exports = {
 		]
 	},
 	plugins:[
-		new webpack.optimize.UglifyJsPlugin({
-			compress:{
-                warnings: false
-            },
-            beautify:false,
-            comments:false
-		}),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	compress:{
+  //               warnings: false
+  //           },
+  //           beautify:false,
+  //           comments:false
+		// }),
 		new htmlWebpackPlugin({
 			template:'./src/app.html',
 			filename:'index.html',
