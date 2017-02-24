@@ -47,6 +47,7 @@ module.exports = {
 		}),
 		new htmlWebpackPlugin({
 			template:'./src/app.html',
+			filename:'index.html',
 			inject:'body',
 			minify:{
 		      	removeEmptyAttributes: true,
