@@ -6,7 +6,11 @@ class HomeEditController {
     this.$rootScope = $rootScope;
   	require('./home.edit.less');
     
-    this.name = '';
+    this.slide1 = require('../../assets/1.jpg');
+    this.slide2 = require('../../assets/2.jpg');
+    this.slide3 = require('../../assets/3.jpg');
+
+    this.name = this.$rootScope.user_name;
     this.text = '';
   }
   change_name(){

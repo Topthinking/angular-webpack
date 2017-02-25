@@ -22,6 +22,22 @@ function AppRouter($urlRouterProvider, $stateProvider,$qProvider) {
         }
       }
     })
+    .state('login',{
+      url:'/login',
+      template:require('./login/login.html'),
+      controller:'LoginController as vm',
+      resolve:{
+        loadController:($q,$ocLazyLoad)=>{
+          return $q((resolve)=>{
+            require.ensure([],()=>{
+              let module = require('./login/login.controller');
+              $ocLazyLoad.load({name:module.name});
+              resolve(module.controller);
+            });
+          });
+        }
+      }
+    })
     .state('app.home', {
       url: '/home',
       template: require('./home/home.html'),

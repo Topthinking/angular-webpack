@@ -1,11 +1,16 @@
 'use strict';
 
 class AppController {
-	constructor($scope){
+	constructor($scope,$rootScope,$state){
+		if(typeof $rootScope.login_state == "undefined" || $rootScope.login_state==0){
+			$state.go('login');
+			return false;
+		}else{
+			this.name = $rootScope.user_name;
+		}
+		
 		this.$scope = $scope;
 		require('./app.less');
-
-		this.name = '';
 
 		this.$scope.$on('changeName',function(event,value){
 			this.name = value;
