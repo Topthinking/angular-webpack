@@ -5,4 +5,5 @@
 ```bash
 npm install
 npm run start
+http://localhost:9123/
 ```

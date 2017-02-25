@@ -1,7 +1,7 @@
 let htmlWebpackPlugin = require('html-webpack-plugin');
 let webpack = require('webpack');
 let fs =require('fs');
-require('./mock/server')
+//require('./mock/server')
 
 module.exports = {
 	entry:{
@@ -43,13 +43,13 @@ module.exports = {
 		]
 	},
 	plugins:[
-		// new webpack.optimize.UglifyJsPlugin({
-		// 	compress:{
-  //               warnings: false
-  //           },
-  //           beautify:false,
-  //           comments:false
-		// }),
+		new webpack.optimize.UglifyJsPlugin({
+			compress:{
+                warnings: false
+            },
+            beautify:false,
+            comments:false
+		}),
 		new htmlWebpackPlugin({
 			template:'./src/app.html',
 			filename:'index.html',
