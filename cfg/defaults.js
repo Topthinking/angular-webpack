@@ -8,7 +8,7 @@
 
 const path = require('path');
 const srcPath = path.join(__dirname, '/../src');
-const dfltPort = 8000;
+const dfltPort = 9123;
 
 /**
  * Get the default modules object for webpack
@@ -16,45 +16,48 @@ const dfltPort = 8000;
  */
 function getDefaultModules() {
   return {
-    preLoaders: [
-      {
-        test: /\.(js|jsx)$/,
-        include: srcPath,
-        loader: 'eslint-loader'
-      }
-    ],
+    noParse: [],
     loaders: [
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'ng-annotate!babel'
+      }, 
       {
-        test: /\.sass/,
-        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
-      },
+        test: /\.html$/,
+        loader: 'raw'
+      }, 
       {
-        test: /\.scss/,
-        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
-      },
+        test: /\.less$/,
+        loader: 'style!css!less'
+      }, 
       {
-        test: /\.less/,
-        loader: 'style-loader!css-loader!less-loader'
-      },
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      }, 
       {
-        test: /\.styl/,
-        loader: 'style-loader!css-loader!stylus-loader'
-      },
+        test: /\.(woff|woff2)$/,
+        loader: "url?prefix=font/&limit=5000"
+      }, 
       {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
-        loader: 'url-loader?limit=8192'
-      },
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/octet-stream"
+      }, 
       {
-        test: /\.(mp4|ogg|svg)$/,
-        loader: 'file-loader'
-      },
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=image/svg+xml"
+      }, 
       {
-        test:/\.json$/,
-        loader:'json-loader'
+        test: /\.(png)|(jpg)|(gif)$/,
+        loader: "url?limit=5"
+      }, 
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+      }, 
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
       }
     ]
   };

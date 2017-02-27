@@ -2,28 +2,37 @@
 
 let htmlWebpackPlugin = require('html-webpack-plugin');
 let webpack = require('webpack');
-let defaultSettings = require('./defaults');
+let fs =require('fs');
+let defaultSettings = require('./cfg/defaults');
+require('./mock/server');
 
 let config = {
   entry:{
     app:'./src/core/angular.bootstrap.js'
   },
   output:{
-    path:__dirname+'../dist/',
+    path:__dirname+'./dist/',
     filename:'[name]-[hash:7].js',
     jsonpFunction:'Topthinking'
   },
+  devServer:{
+    historyApiFallback:true,
+    hot:true,
+    inline:true,
+    progress:true,
+    port:defaultSettings.port,
+    proxy: {
+            '**/*': {
+                target: 'htstp://localhost:9020',
+                pathRewrite:JSON.parse(fs.readFileSync('./rewrite.json')),
+                secure: false
+            }
+        }
+  },
   resolve:{
-    root:__dirname+'../src/'
+    root:__dirname+'./src/'
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress:{
-                warnings: false
-            },
-      beautify:false,
-      comments:false
-    }),
     new htmlWebpackPlugin({
       template:'./src/app.html',
       filename:'index.html',

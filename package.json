@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
+    "dev": "webpack-dev-server --config server.js --hot --inline",
+    "dist": "webpack --config webpack.config.js",
     "jsw": "json-server --watch json_server/db.json --routes json_server/router.json --port 9090"
   },
   "author": "Topthinking",
@@ -21,6 +22,7 @@
     "babel-core": "^5.6.1",
     "babel-loader": "^5.1.4",
     "bootstrap": "^3.3.7",
+    "bootstrap-loader": "^2.0.0-beta.22",
     "bootstrap-sass": "^3.3.7",
     "css-loader": "^0.26.2",
     "file-loader": "^0.10.1",
@@ -39,6 +41,7 @@
     "karma-webpack": "^1.5.1",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
+    "minimist": "^1.2.0",
     "ng-annotate-loader": "^0.2.0",
     "node-libs-browser": "^0.5.2",
     "node-sass": "^4.5.0",

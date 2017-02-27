@@ -4,6 +4,9 @@
 
 ```bash
 npm install
-npm run start
+测试：
+npm run dev 
 http://localhost:9123/
+导出：
+npm run dist
 ```
