@@ -11,5 +11,7 @@ class HomeController {
 }
 
 export default angular
-  .module('home.controller', [])
+  .module('home.controller', [
+  	require('../../directive/hello/hello.directive')
+  	])
   .controller('HomeController', HomeController);
