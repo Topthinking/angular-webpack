@@ -1,9 +1,13 @@
 'use strict';
 
-export default require('angular')
-  .module('TopApp', [
+import angular from 'angular';
+
+let AppModule = 'app';
+
+angular.module(AppModule, [
     require('angular-ui-router'),
-    (() => { require('oclazyload'); return 'oc.lazyLoad' })(),
+    require('oclazyload'),
     require('angular-animate'),
-    require('./pages/app.router').name
-  ]);
+    require('./view/_router').name
+  ])
+angular.bootstrap(document, [AppModule], { strictDi: true })

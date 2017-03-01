@@ -6,20 +6,22 @@ let defaultSettings = require('./cfg/defaults');
 
 let config = {
   entry:{
-    app:'./src/core/angular.bootstrap.js',
+    app:'./src/app.js',
     vendor: [
       "jquery",
-      "angular",
-      'angular-ui-router',
+      "font-awesome-webpack",
+      "bootstrap-loader",
+      "angular", 
+      'angular-ui-router', 
       'oclazyload',
-      'bootstrap-loader',
-      'font-awesome-webpack'
+      'angular-animate'
     ]
   },
   output:{
     path:__dirname+'/dist/',
-    filename:'[name]-[hash:7].js',
-    jsonpFunction:'Topthinking'
+    filename: "script/[name].[hash:6].js",
+    jsonpFunction:'Topthinking',
+    chunkFilename: "chunks/[name].[chunkhash:6].js"
   },
   resolve:{
     root:__dirname+'./src/'
@@ -33,6 +35,7 @@ let config = {
       comments:false
     }),
     new htmlWebpackPlugin({
+      chunks: ['app', 'vendor'],
       template:'./src/app.html',
       filename:'index.html',
       inject:'body',
@@ -47,7 +50,8 @@ let config = {
       $:'jquery',
       jQuery:"jquery",
       "window.jQuery":"jquery"
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'script/vendor.[hash:6].js')
   ],
   module: defaultSettings.getDefaultModules()
 };

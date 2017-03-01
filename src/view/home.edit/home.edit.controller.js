@@ -34,6 +34,6 @@ class HomeEditController {
 
 export default angular
   .module('home.edit.controller', [
-    require('../../directive/hello/hello.directive')
+    require('../../directive/hello/hello.directive').name
     ])
   .controller('HomeEditController', HomeEditController);
