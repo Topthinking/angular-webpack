@@ -6,7 +6,15 @@ let defaultSettings = require('./cfg/defaults');
 
 let config = {
   entry:{
-    app:'./src/core/angular.bootstrap.js'
+    app:'./src/core/angular.bootstrap.js',
+    vendor: [
+      "jquery",
+      "angular",
+      'angular-ui-router',
+      'oclazyload',
+      'bootstrap-loader',
+      'font-awesome-webpack'
+    ]
   },
   output:{
     path:__dirname+'/dist/',

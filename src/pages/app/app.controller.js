@@ -2,15 +2,6 @@
 
 class AppController {
 	constructor($scope,$rootScope,$state,$http){
-		// $http.post("http://183.131.78.204:7000/aj/user/login",{
-		// 	"user_name":"18301866067",
-		// 	"password":"1woshisyj2"
-		// },{
-		// 	'Content-Type':'application/x-www-form-urlencoded'
-		// }).then(function(data){
-		// 	console.log(data);
-		// });
-
 		$http({
 			url:'http://183.131.78.204:7000/aj/user/login',
 			method:'POST',
@@ -18,8 +9,8 @@ class AppController {
 				'Content-Type':'application/x-www-form-urlencoded'
 			},
 			data:$.param({
-				user_name:"18301866067",
-				password:"1woshisyj2"
+				user_name:"123",
+				password:"123"
 			})
 		}).then(function(response){
 			if(response.data.status){

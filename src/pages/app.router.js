@@ -8,7 +8,14 @@ function AppRouter($urlRouterProvider, $stateProvider,$qProvider) {
     .state('app',{
       abstract:true,
       url:'/app',
-      template:require('./app/app.html'),
+      templateProvider:($q)=>{
+        let deferred = $q.defer();
+        require.ensure([],()=>{
+            let template = require('./app/app.html');
+            deferred.resolve(template);
+        });
+        return deferred.promise;
+      },
       controller:'AppController as vm',
       resolve:{
         loadController:($q,$ocLazyLoad)=>{
@@ -24,7 +31,14 @@ function AppRouter($urlRouterProvider, $stateProvider,$qProvider) {
     })
     .state('login',{
       url:'/login',
-      template:require('./login/login.html'),
+      templateProvider:($q)=>{
+        let deferred = $q.defer();
+        require.ensure([],()=>{
+            let template = require('./login/login.html');
+            deferred.resolve(template);
+        });
+        return deferred.promise;
+      },
       controller:'LoginController as vm',
       resolve:{
         loadController:($q,$ocLazyLoad)=>{
@@ -40,7 +54,14 @@ function AppRouter($urlRouterProvider, $stateProvider,$qProvider) {
     })
     .state('app.home', {
       url: '/home',
-      template: require('./home/home.html'),
+      templateProvider:($q)=>{
+        let deferred = $q.defer();
+        require.ensure([],()=>{
+            let template = require('./home/home.html');
+            deferred.resolve(template);
+        });
+        return deferred.promise;
+      },
       controller: 'HomeController as vm',
       resolve: {
         loadController: ($q, $ocLazyLoad) => {
@@ -56,7 +77,14 @@ function AppRouter($urlRouterProvider, $stateProvider,$qProvider) {
     })
     .state('app.home.edit', {
       url: '/edit',
-      template: require('./home.edit/home.edit.html'),
+      templateProvider:($q)=>{
+        let deferred = $q.defer();
+        require.ensure([],()=>{
+            let template = require('./home.edit/home.edit.html');
+            deferred.resolve(template);
+        });
+        return deferred.promise;
+      },
       controller: 'HomeEditController as vm',
       resolve: {
         loadController: ($q, $ocLazyLoad) => {
@@ -67,7 +95,7 @@ function AppRouter($urlRouterProvider, $stateProvider,$qProvider) {
               resolve(module.controller);
             });
           });
-        }
+        } 
       }
     });
 }
