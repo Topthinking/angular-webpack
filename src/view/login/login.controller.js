@@ -1,22 +1,55 @@
 'use strict';
 
 class LoginController{
-	constructor($state,$rootScope){
-		if(typeof $rootScope.login_state != "undefined" && $rootScope.login_state==1){
-			$state.go('app.home');
-			return false;
-		}
-		this.$rootScope = $rootScope;
+	constructor($state,$rootScope,$cookieStore,AccessService){
 		this.$state = $state;
+		this.$rootScope = $rootScope;
+		this.$cookieStore = $cookieStore;
+		this.AccessService = AccessService;
+		
 		require('./login.less');
+
+		if(typeof this.$cookieStore.get("user_info") == "undefined"){
+			//未登录
+		}else{
+			//已登录
+			this.$state.go('app.home');
+		}
 	}
+
 	login(){
-		this.$rootScope.login_state = 1;
-		this.$rootScope.user_name = this.name;
-		this.$state.go('app.home');
+		this.AccessService.login({
+			"user_name":this.user_name,
+			"password":this.password
+		}).then(function(response){
+			if(response.data.status){
+				this.$cookieStore.put("user_info",{
+					user_name:this.user_name,
+					uid:response.data.data.uid
+				});
+				this.$state.go('app.home');
+			}else{
+				alert(response.data.msg);
+			}
+		}.bind(this));
+	}
+
+	register(){
+		this.AccessService.register({
+			"user_name":this.user_name,
+			"password":this.password
+		}).then(function(response){
+			if(response.data.status){
+				alert(response.data.msg);
+			}else{
+				alert(response.data.msg);
+			}
+		}.bind(this));
 	}
 }
 
 export default angular
-	.module('login.controller',[])
+	.module('login.controller',[
+		require('../../service/access.service').name
+		])
 	.controller('LoginController',LoginController);

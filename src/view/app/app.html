@@ -3,6 +3,7 @@
 <ul>
 	<li><a ui-sref="app.home">home</a></li>
 	<li><a ui-sref="app.home.edit">修改用户名</a></li>
+	<li><a ng-click="vm.logout()">退出</a></li>
 	<li ng-if="vm.show_name" class="show_name">用户名：{{vm.name}}</li>
 </ul>
 <div ui-view></div>

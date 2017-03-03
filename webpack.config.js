@@ -14,7 +14,8 @@ let config = {
       "angular", 
       'angular-ui-router', 
       'oclazyload',
-      'angular-animate'
+      'angular-animate',
+      'angular-cookies'
     ]
   },
   output:{

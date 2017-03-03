@@ -1,8 +1,6 @@
 'use strict';
 
 import angular from 'angular';
-import myHeader from './view/common/header.html';
-import myFooter from './view/common/footer.html';
 
 let AppModule = 'app';
 
@@ -10,8 +8,8 @@ angular.module(AppModule, [
     require('angular-ui-router'),
     require('oclazyload'),
     require('angular-animate'),
-    require('./view/_router').name
-  ])
-	.component('myHeader', {template: myHeader})
-	.component('myFooter', {template: myFooter});
+    require('angular-cookies'),
+    require('./view/_router').name,
+    require('./service/common.service').name
+  ]);
 angular.bootstrap(document, [AppModule], { strictDi: true });

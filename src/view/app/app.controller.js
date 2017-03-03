@@ -1,41 +1,31 @@
 'use strict';
 
 class AppController {
-	constructor($scope,$rootScope,$state,$http){
-		$http({
-			url:'http://183.131.78.204:7000/aj/user/login',
-			method:'POST',
-			headers:{
-				'Content-Type':'application/x-www-form-urlencoded'
-			},
-			data:$.param({
-				user_name:"123",
-				password:"123"
-			})
-		}).then(function(response){
-			if(response.data.status){
-				console.log(response.data.msg);
-			}else{
-				console.log(response.data.msg);
-			}
-		});
-
-		if(typeof $rootScope.login_state == "undefined" || $rootScope.login_state==0){
-			//$state.go('login');
-			//return false;
-		}else{
-			this.name = $rootScope.user_name;
-		}
-		
+	constructor($scope,$rootScope,$state,$http,$cookieStore){
 		this.$scope = $scope;
+		this.$state = $state;
+		this.$rootScope = $rootScope;
+		this.$cookieStore = $cookieStore;
+		
 		require('./app.less');
+
+		if(typeof this.$cookieStore.get("user_info") == "undefined"){
+			//未登录
+			this.$state.go('app.home');
+		}
+
+		this.show_name = true;
+		this.name = this.$cookieStore.get("user_info").user_name;
 
 		this.$scope.$on('changeName',function(event,value){
 			this.name = value;
 			this.show_name = this.name=='' ? false : true;
 		}.bind(this));
+	}
 
-		this.show_name = this.name=='' ? false : true;
+	logout(){
+		this.$cookieStore.remove("user_info");
+		this.$state.go("login");
 	}
 }
 

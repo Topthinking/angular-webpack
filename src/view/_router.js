@@ -1,4 +1,5 @@
 'use strict';
+let Host = "http://183.131.78.204:7021";
 
 function ViewRouter($urlRouterProvider,$qProvider) {
   $qProvider.errorOnUnhandledRejections(false);
@@ -6,10 +7,21 @@ function ViewRouter($urlRouterProvider,$qProvider) {
 }
 
 export default angular
-  .module('view.router', [
-  		require('./app/_router.js').name,
-      	require('./login/_router.js').name,
-      	require('./home/_router.js').name,
-      	require('./home.edit/_router.js').name
-    ])
+  .module('view.router', (()=>{
+  	let router_list=[];
+  	[
+      'app',
+      'login',
+      'home',
+      'home.edit',
+    ].forEach((value)=>{
+  		router_list.push(require('./'+value+'/_router').name);
+  	});
+  	return router_list;
+  })())
+  .value('url_param',{
+  	"access_state":Host+"/access/state",
+    "access_login":Host+"/access/login",
+    "access_register":Host+"/access/register",
+  })
   .config(ViewRouter);
