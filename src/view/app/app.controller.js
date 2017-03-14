@@ -11,7 +11,8 @@ class AppController {
 
 		if(typeof this.$cookieStore.get("user_info") == "undefined"){
 			//未登录
-			this.$state.go('app.home');
+			this.$state.go('login');
+			return;
 		}
 
 		this.show_name = true;
